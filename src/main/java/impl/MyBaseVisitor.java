@@ -41,23 +41,17 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
     }
 
     public Object visitVarID(GrammarFileParser.VarIDContext ctx) {
-
         return SymbolsTable.getInstance().getSymbol(ctx.getText());
     }
 
     public Object visitStmtAttrib(GrammarFileParser.StmtAttribContext ctx) {
-
-
         SymbolsTable.getInstance().addSymbol(ctx.variable().getText());
         Object value = visit(ctx.expression());
         if (value == null) {
             value = ctx.expression().getText();
         }
-        Double var = SymbolsTable.getInstance().getSymbol(ctx.variable().getText());
-        double number = ParserValues.getInstance().parseString(value.toString());
-        SymbolsTable.getInstance().update(ctx.variable().getText(), number);
+        SymbolsTable.getInstance().update(ctx.variable().getText(), Double.parseDouble(value.toString()));
         return 0;
-
     }
 
     @Override
@@ -70,11 +64,8 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
         } else {
             if (ctx.children.get(0).getText().equals("-")) {
                 ParseTree s = ctx.children.get(1);
-
                 ctx.children.set(1, s);
-                System.out.println("sssssssssssssssss");
             }
-            List<GrammarFileParser.TermContext> c = ctx.term();
             total = Double.parseDouble(visit(ctx.term(0)).toString());
         }
         int pos = 1;
@@ -91,10 +82,8 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
 
     @Override
     public Object visitMultExpr(GrammarFileParser.MultExprContext ctx) {
-
         return visit(ctx.children.get(1));
     }
-
 
     public Object visitTermExpression(GrammarFileParser.TermExpressionContext ctx) {
         if (ctx.factor(0).getText().matches("[a-zA-Z][a-zA-Z0-9_]*(\\Q[\\E[0-9]+\\Q]\\E)?")) {
@@ -105,16 +94,15 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
         } else {
             List<GrammarFileParser.FactorContext> dd = ctx.factor();
             double total;
-            int pos = 1 ;
+            int pos = 1;
             if (ctx.factor().get(0).children.size() == 2) {
                 total = Double.parseDouble(ctx.factor().get(0).children.get(1).getText());
-                if(ctx.factor(0).children.get(0).getText().equals("-")){
-                    total *=-1;
+                if (ctx.factor(0).children.get(0).getText().equals("-")) {
+                    total *= -1;
                 }
             } else {
                 total = Double.parseDouble(ctx.factor(0).getText());
             }
-
 
             for (GrammarFileParser.MultopContext add : ctx.multop()) {
                 if (add.getText().equals("*")) {
@@ -131,12 +119,10 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
                     } else {
                         total /= Double.parseDouble(c.toString());
                     }
-
                 }
                 pos++;
             }
             return total;
         }
     }
-
 }
