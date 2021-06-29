@@ -14,8 +14,8 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
     public Object visitReadStmt(GrammarFileParser.ReadStmtContext ctx) {
         Scanner s = new Scanner(System.in);
         for (GrammarFileParser.VariableContext var : ctx.variable()) {
-            Double value = SymbolsTable.getInstance().getSymbol(var.getText());
-            value = s.nextDouble();
+            SymbolsTable.getInstance().addSymbol(var.getText());
+            SymbolsTable.getInstance().update(var.getText(), s.nextDouble());
         }
         return 0d;
     }
@@ -23,7 +23,6 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
     public Object visitWriteStmt(GrammarFileParser.WriteStmtContext ctx) {
         try {
             for (GrammarFileParser.ExpressionContext value : ctx.expression()) {
-
                 String valor = visit(value).toString();
                 if (valor.startsWith("\"")) {
                     valor = valor.subSequence(1, valor.length() - 1).toString();
@@ -31,7 +30,7 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
                 System.out.println(valor);
             }
         } catch (NullPointerException ex) {
-            throw new ParseCancellationException("Ошибка интерпретации: Неверный тип!");
+            throw new ParseCancellationException("Ошибка интерпретации: ошибка выполнения чтения!");
         }
         return 0d;
     }
