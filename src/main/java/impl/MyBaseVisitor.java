@@ -1,5 +1,6 @@
 package impl;
 
+
 import gen.antlr.GrammarFileBaseVisitor;
 import gen.antlr.GrammarFileParser;
 import org.antlr.v4.runtime.misc.ParseCancellationException;
@@ -67,6 +68,12 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
         } else if (ctx.term(0).getText().startsWith("\"")) {
             return ctx.term(0).getText();
         } else {
+            if (ctx.children.get(0).getText().equals("-")) {
+                ParseTree s = ctx.children.get(1);
+
+                ctx.children.set(1, s);
+                System.out.println("sssssssssssssssss");
+            }
             List<GrammarFileParser.TermContext> c = ctx.term();
             total = Double.parseDouble(visit(ctx.term(0)).toString());
         }
@@ -89,7 +96,6 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
     }
 
 
-
     public Object visitTermExpression(GrammarFileParser.TermExpressionContext ctx) {
         if (ctx.factor(0).getText().matches("[a-zA-Z][a-zA-Z0-9_]*(\\Q[\\E[0-9]+\\Q]\\E)?")) {
             Object test = visit(ctx.factor(0));
@@ -98,20 +104,30 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
             return ctx.factor(0).getText();
         } else {
             List<GrammarFileParser.FactorContext> dd = ctx.factor();
-            double total = Double.parseDouble(ctx.factor(0).getText());
-            int pos = 1;
+            double total;
+            int pos = 1 ;
+            if (ctx.factor().get(0).children.size() == 2) {
+                total = Double.parseDouble(ctx.factor().get(0).children.get(1).getText());
+                if(ctx.factor(0).children.get(0).getText().equals("-")){
+                    total *=-1;
+                }
+            } else {
+                total = Double.parseDouble(ctx.factor(0).getText());
+            }
+
+
             for (GrammarFileParser.MultopContext add : ctx.multop()) {
                 if (add.getText().equals("*")) {
                     Object c = visit(ctx.factor(pos));
                     if (c == null) {
-                        total *= Double.parseDouble(ctx.factor(pos).getText() );
+                        total *= Double.parseDouble(ctx.factor(pos).getText());
                     } else {
                         total *= Double.parseDouble(c.toString());
                     }
                 } else if (add.getText().equals("/")) {
                     Object c = visit(ctx.factor(pos));
                     if (c == null) {
-                        total /= Double.parseDouble(ctx.factor(pos).getText() );
+                        total /= Double.parseDouble(ctx.factor(pos).getText());
                     } else {
                         total /= Double.parseDouble(c.toString());
                     }

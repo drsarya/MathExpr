@@ -5,11 +5,11 @@ smpstatement: assignstatement #assignStmt|   readstatement #resultReadStmt| writ
 assignstatement : variable  EQUAL expression #stmtAttrib;
 readstatement : READ LPAREN variable (COMMA variable)* RPAREN #readStmt;
 writestatement : WRITE LPAREN expression (COMMA expression)* RPAREN #writeStmt;
+expression :    term (addop term)* #smplExpression;
 
-expression : (PLUS | MINUS )? term (addop term)* #smplExpression;
-term : factor (multop factor)* #termExpression;
-factor: variable #varExpr | constant #constantExpr | LPAREN expression RPAREN #multExpr  ;
-constant : DIGIT (DOT DIGIT)* | ID ;
+term :  factor (multop factor)* #termExpression;
+factor: variable #varExpr | ( MINUS )? constant #constantExpr | LPAREN expression RPAREN #multExpr  ;
+constant :  DIGIT (DOT DIGIT)*  | ID  ;
 addop : PLUS | MINUS  ;
 multop : DIV | MULT  ;
 variable : ID #varID  ;
@@ -49,6 +49,7 @@ RPAREN: ')';
 EQUAL : '=';
 PLUS : '+';
 MINUS : '-';
+
 MULT : '*';
 DIV: '/';
 
