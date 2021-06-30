@@ -682,6 +682,7 @@ public class GrammarFileParser extends Parser {
 		public VariableContext variable() {
 			return getRuleContext(VariableContext.class,0);
 		}
+		public TerminalNode MINUS() { return getToken(GrammarFileParser.MINUS, 0); }
 		public VarExprContext(FactorContext ctx) { copyFrom(ctx); }
 		@Override
 		public void enterRule(ParseTreeListener listener) {
@@ -744,14 +745,24 @@ public class GrammarFileParser extends Parser {
 		enterRule(_localctx, 14, RULE_factor);
 		int _la;
 		try {
-			setState(91);
+			setState(94);
 			_errHandler.sync(this);
-			switch ( getInterpreter().adaptivePredict(_input,7,_ctx) ) {
+			switch ( getInterpreter().adaptivePredict(_input,8,_ctx) ) {
 			case 1:
 				_localctx = new VarExprContext(_localctx);
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(82);
+				setState(83);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==MINUS) {
+					{
+					setState(82);
+					match(MINUS);
+					}
+				}
+
+				setState(85);
 				variable();
 				}
 				break;
@@ -759,17 +770,17 @@ public class GrammarFileParser extends Parser {
 				_localctx = new ConstantExprContext(_localctx);
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(84);
+				setState(87);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 				if (_la==MINUS) {
 					{
-					setState(83);
+					setState(86);
 					match(MINUS);
 					}
 				}
 
-				setState(86);
+				setState(89);
 				constant();
 				}
 				break;
@@ -777,11 +788,11 @@ public class GrammarFileParser extends Parser {
 				_localctx = new MultExprContext(_localctx);
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(87);
+				setState(90);
 				match(LPAREN);
-				setState(88);
+				setState(91);
 				expression();
-				setState(89);
+				setState(92);
 				match(RPAREN);
 				}
 				break;
@@ -827,7 +838,7 @@ public class GrammarFileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(93);
+			setState(96);
 			_la = _input.LA(1);
 			if ( !(_la==ID || _la==DIGIT) ) {
 			_errHandler.recoverInline(this);
@@ -879,7 +890,7 @@ public class GrammarFileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(95);
+			setState(98);
 			_la = _input.LA(1);
 			if ( !(_la==PLUS || _la==MINUS) ) {
 			_errHandler.recoverInline(this);
@@ -931,7 +942,7 @@ public class GrammarFileParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(97);
+			setState(100);
 			_la = _input.LA(1);
 			if ( !(_la==MULT || _la==DIV) ) {
 			_errHandler.recoverInline(this);
@@ -990,7 +1001,7 @@ public class GrammarFileParser extends Parser {
 			_localctx = new VarIDContext(_localctx);
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(99);
+			setState(102);
 			match(ID);
 			}
 		}
@@ -1006,31 +1017,32 @@ public class GrammarFileParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20h\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\20k\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\4"+
 		"\f\t\f\4\r\t\r\3\2\3\2\3\2\6\2\36\n\2\r\2\16\2\37\3\3\3\3\3\3\5\3%\n\3"+
 		"\3\4\3\4\3\4\3\4\3\5\3\5\3\5\3\5\3\5\7\5\60\n\5\f\5\16\5\63\13\5\3\5\3"+
 		"\5\3\6\3\6\3\6\3\6\3\6\7\6<\n\6\f\6\16\6?\13\6\3\6\3\6\3\7\3\7\3\7\3\7"+
-		"\7\7G\n\7\f\7\16\7J\13\7\3\b\3\b\3\b\3\b\7\bP\n\b\f\b\16\bS\13\b\3\t\3"+
-		"\t\5\tW\n\t\3\t\3\t\3\t\3\t\3\t\5\t^\n\t\3\n\3\n\3\13\3\13\3\f\3\f\3\r"+
-		"\3\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\5\3\2\16\17\3\2\b\t\3"+
-		"\2\n\13\2e\2\35\3\2\2\2\4$\3\2\2\2\6&\3\2\2\2\b*\3\2\2\2\n\66\3\2\2\2"+
-		"\fB\3\2\2\2\16K\3\2\2\2\20]\3\2\2\2\22_\3\2\2\2\24a\3\2\2\2\26c\3\2\2"+
-		"\2\30e\3\2\2\2\32\33\5\4\3\2\33\34\7\r\2\2\34\36\3\2\2\2\35\32\3\2\2\2"+
-		"\36\37\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3\2\2\2!%\5\6\4\2\"%\5\b\5"+
-		"\2#%\5\n\6\2$!\3\2\2\2$\"\3\2\2\2$#\3\2\2\2%\5\3\2\2\2&\'\5\30\r\2\'("+
-		"\7\7\2\2()\5\f\7\2)\7\3\2\2\2*+\7\3\2\2+,\7\5\2\2,\61\5\30\r\2-.\7\f\2"+
-		"\2.\60\5\30\r\2/-\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2\2\2\62\64"+
-		"\3\2\2\2\63\61\3\2\2\2\64\65\7\6\2\2\65\t\3\2\2\2\66\67\7\4\2\2\678\7"+
-		"\5\2\28=\5\f\7\29:\7\f\2\2:<\5\f\7\2;9\3\2\2\2<?\3\2\2\2=;\3\2\2\2=>\3"+
-		"\2\2\2>@\3\2\2\2?=\3\2\2\2@A\7\6\2\2A\13\3\2\2\2BH\5\16\b\2CD\5\24\13"+
-		"\2DE\5\16\b\2EG\3\2\2\2FC\3\2\2\2GJ\3\2\2\2HF\3\2\2\2HI\3\2\2\2I\r\3\2"+
-		"\2\2JH\3\2\2\2KQ\5\20\t\2LM\5\26\f\2MN\5\20\t\2NP\3\2\2\2OL\3\2\2\2PS"+
-		"\3\2\2\2QO\3\2\2\2QR\3\2\2\2R\17\3\2\2\2SQ\3\2\2\2T^\5\30\r\2UW\7\t\2"+
-		"\2VU\3\2\2\2VW\3\2\2\2WX\3\2\2\2X^\5\22\n\2YZ\7\5\2\2Z[\5\f\7\2[\\\7\6"+
-		"\2\2\\^\3\2\2\2]T\3\2\2\2]V\3\2\2\2]Y\3\2\2\2^\21\3\2\2\2_`\t\2\2\2`\23"+
-		"\3\2\2\2ab\t\3\2\2b\25\3\2\2\2cd\t\4\2\2d\27\3\2\2\2ef\7\16\2\2f\31\3"+
-		"\2\2\2\n\37$\61=HQV]";
+		"\7\7G\n\7\f\7\16\7J\13\7\3\b\3\b\3\b\3\b\7\bP\n\b\f\b\16\bS\13\b\3\t\5"+
+		"\tV\n\t\3\t\3\t\5\tZ\n\t\3\t\3\t\3\t\3\t\3\t\5\ta\n\t\3\n\3\n\3\13\3\13"+
+		"\3\f\3\f\3\r\3\r\3\r\2\2\16\2\4\6\b\n\f\16\20\22\24\26\30\2\5\3\2\16\17"+
+		"\3\2\b\t\3\2\n\13\2i\2\35\3\2\2\2\4$\3\2\2\2\6&\3\2\2\2\b*\3\2\2\2\n\66"+
+		"\3\2\2\2\fB\3\2\2\2\16K\3\2\2\2\20`\3\2\2\2\22b\3\2\2\2\24d\3\2\2\2\26"+
+		"f\3\2\2\2\30h\3\2\2\2\32\33\5\4\3\2\33\34\7\r\2\2\34\36\3\2\2\2\35\32"+
+		"\3\2\2\2\36\37\3\2\2\2\37\35\3\2\2\2\37 \3\2\2\2 \3\3\2\2\2!%\5\6\4\2"+
+		"\"%\5\b\5\2#%\5\n\6\2$!\3\2\2\2$\"\3\2\2\2$#\3\2\2\2%\5\3\2\2\2&\'\5\30"+
+		"\r\2\'(\7\7\2\2()\5\f\7\2)\7\3\2\2\2*+\7\3\2\2+,\7\5\2\2,\61\5\30\r\2"+
+		"-.\7\f\2\2.\60\5\30\r\2/-\3\2\2\2\60\63\3\2\2\2\61/\3\2\2\2\61\62\3\2"+
+		"\2\2\62\64\3\2\2\2\63\61\3\2\2\2\64\65\7\6\2\2\65\t\3\2\2\2\66\67\7\4"+
+		"\2\2\678\7\5\2\28=\5\f\7\29:\7\f\2\2:<\5\f\7\2;9\3\2\2\2<?\3\2\2\2=;\3"+
+		"\2\2\2=>\3\2\2\2>@\3\2\2\2?=\3\2\2\2@A\7\6\2\2A\13\3\2\2\2BH\5\16\b\2"+
+		"CD\5\24\13\2DE\5\16\b\2EG\3\2\2\2FC\3\2\2\2GJ\3\2\2\2HF\3\2\2\2HI\3\2"+
+		"\2\2I\r\3\2\2\2JH\3\2\2\2KQ\5\20\t\2LM\5\26\f\2MN\5\20\t\2NP\3\2\2\2O"+
+		"L\3\2\2\2PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2R\17\3\2\2\2SQ\3\2\2\2TV\7\t\2"+
+		"\2UT\3\2\2\2UV\3\2\2\2VW\3\2\2\2Wa\5\30\r\2XZ\7\t\2\2YX\3\2\2\2YZ\3\2"+
+		"\2\2Z[\3\2\2\2[a\5\22\n\2\\]\7\5\2\2]^\5\f\7\2^_\7\6\2\2_a\3\2\2\2`U\3"+
+		"\2\2\2`Y\3\2\2\2`\\\3\2\2\2a\21\3\2\2\2bc\t\2\2\2c\23\3\2\2\2de\t\3\2"+
+		"\2e\25\3\2\2\2fg\t\4\2\2g\27\3\2\2\2hi\7\16\2\2i\31\3\2\2\2\13\37$\61"+
+		"=HQUY`";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

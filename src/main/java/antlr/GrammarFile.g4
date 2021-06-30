@@ -8,7 +8,7 @@ writestatement : WRITE LPAREN expression (COMMA expression)* RPAREN #writeStmt;
 
 expression :    term (addop term)* #smplExpression;
 term :  factor (multop factor)* #termExpression;
-factor: variable #varExpr | ( MINUS )? constant #constantExpr | LPAREN expression RPAREN #multExpr  ;
+factor: ( MINUS )? variable #varExpr | ( MINUS )? constant #constantExpr | LPAREN expression RPAREN #multExpr  ;
 constant :  DIGIT | ID  ;
 addop : PLUS | MINUS  ;
 multop : DIV | MULT  ;
@@ -59,3 +59,5 @@ SEMI: ';';
 ID      : ('a' .. 'z' | 'A' .. 'Z') ('a' .. 'z' | 'A' .. 'Z' | '0' .. '9' | '_')*;
 DIGIT  : [0-9]+'.'?[0-9]* ;
 WS     : [ \t\r\n] -> skip  ;
+
+

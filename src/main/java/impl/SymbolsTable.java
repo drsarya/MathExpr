@@ -17,18 +17,17 @@ public class SymbolsTable {
         return INSTANCE;
     }
 
-    public Double addSymbol(String symbol) {
+    public void addSymbol(String symbol) {
         if (!symbols.containsKey(symbol)) {
             symbols.put(symbol, null);
         }
-        return symbols.get(symbol);
     }
 
     public Double getSymbol(String symbol) {
         if (symbols.containsKey(symbol)) {
             return symbols.get(symbol);
-        } else throw new IllegalArgumentException("Переменная не объявлена");
-
+        } else
+            throw new IllegalArgumentException("Переменная не объявлена");
     }
 
     public void update(String text, Double value) {

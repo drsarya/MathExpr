@@ -1,5 +1,6 @@
 import gen.antlr.GrammarFileLexer;
 import gen.antlr.GrammarFileParser;
+import gen.antlr.GrammarFileVisitor;
 import impl.MyBaseVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
@@ -13,9 +14,8 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         GrammarFileParser parser = new GrammarFileParser(tokens);
         ParseTree tree = parser.program();
-        MyBaseVisitor eval = new MyBaseVisitor();
+        GrammarFileVisitor eval = new MyBaseVisitor();
         print((RuleContext) tree);
-
         eval.visit(tree);
     }
 
@@ -35,11 +35,6 @@ public class Main {
             System.out.println("  " + ctx.getText());
 
         } else {
-         /*   for (int i = 0; i < indentation; i++) {
-                System.out.print("  ");
-            }
-            System.out.println("  " + ctx.getText());*/
-
         }
         for (int i = 0; i < ctx.getChildCount(); i++) {
             ParseTree element = ctx.getChild(i);

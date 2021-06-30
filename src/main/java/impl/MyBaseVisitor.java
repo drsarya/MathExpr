@@ -95,14 +95,18 @@ public class MyBaseVisitor extends GrammarFileBaseVisitor<Object> {
             double total;
             int pos = 1;
             if (ctx.factor().get(0).children.size() == 2) {
-                total = Double.parseDouble(ctx.factor().get(0).children.get(1).getText());
+                Object value = visit(ctx.factor().get(0));
+                if(value==null){
+                    total = Double.parseDouble(ctx.factor().get(0).children.get(1).getText());
+                }else{
+                    total = Double.parseDouble( value.toString() );
+                }
                 if (ctx.factor(0).children.get(0).getText().equals("-")) {
                     total *= -1;
                 }
             } else {
                 total = Double.parseDouble(ctx.factor(0).getText());
             }
-
             for (GrammarFileParser.MultopContext add : ctx.multop()) {
                 if (add.getText().equals("*")) {
                     Object c = visit(ctx.factor(pos));
