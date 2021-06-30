@@ -1,9 +1,11 @@
 import gen.antlr.GrammarFileLexer;
 import gen.antlr.GrammarFileParser;
 import gen.antlr.GrammarFileVisitor;
+import impl.ASTBuilderVisitor;
 import impl.MyBaseVisitor;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.tree.ParseTree;
+import tree.ASTNode;
 
 import java.io.IOException;
 
@@ -14,9 +16,11 @@ public class Main {
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         GrammarFileParser parser = new GrammarFileParser(tokens);
         ParseTree tree = parser.program();
+        GrammarFileVisitor<ASTNode> astBuilder= new ASTBuilderVisitor();
         GrammarFileVisitor eval = new MyBaseVisitor();
         print((RuleContext) tree);
-        eval.visit(tree);
+//        eval.visit(tree);
+        ASTNode ast = astBuilder.visit(tree);
     }
 
     private static void print(RuleContext ctx) {
