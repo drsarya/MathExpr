@@ -1,4 +1,4 @@
 package tree;
 
-public class ASTDivNode {
+public class ASTDivNode extends ASTBinOpNode{
 }

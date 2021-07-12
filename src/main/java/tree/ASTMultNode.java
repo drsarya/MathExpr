@@ -1,4 +1,4 @@
 package tree;
 
-public class ASTMultNode {
+public class ASTMultNode extends ASTBinOpNode{
 }

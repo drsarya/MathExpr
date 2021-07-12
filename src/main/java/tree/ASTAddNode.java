@@ -1,4 +1,4 @@
 package tree;
 
-public class ASTAddNode {
+public class ASTAddNode extends ASTBinOpNode {
 }

@@ -1,4 +1,4 @@
 package tree;
 
-public class ASTSubstrNode {
+public class ASTSubstrNode extends ASTBinOpNode {
 }
